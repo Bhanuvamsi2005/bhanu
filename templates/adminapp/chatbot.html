@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        .card {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .chat-window {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+        .message-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .send-button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #333;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .send-button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="chat-window" id="chat-window"></div>
+        <div class="chat-input">
+            <input type="text" id="user-message" class="message-input" placeholder="Type your message here...">
+            <button class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <script>
+        function sendMessage() {
+            const userMessage = document.getElementById("user-message").value;
+            const chatWindow = document.getElementById("chat-window");
+
+            // Display user message
+            const userBubble = document.createElement("div");
+            userBubble.textContent = `You: ${userMessage}`;
+            chatWindow.appendChild(userBubble);
+
+            // Send message to the server
+            fetch("/chat/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                    "X-CSRFToken": "{{ csrf_token }}"
+                },
+                body: `message=${encodeURIComponent(userMessage)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display bot response
+                const botBubble = document.createElement("div");
+                botBubble.textContent = `Bot: ${data.response}`;
+                chatWindow.appendChild(botBubble);
+                chatWindow.scrollTop = chatWindow.scrollHeight;
+            });
+
+            // Clear input field
+            document.getElementById("user-message").value = "";
+        }
+    </script>
+</body>
+</html>

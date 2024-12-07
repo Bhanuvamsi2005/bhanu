@@ -1,0 +1,36 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'css/loginpage_styles.css' %}">
+</head>
+<body>
+    {% block body %}
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="{% url 'loginpagelogic' %}" method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <div class="info-message">Enter a 4-digit username for vendor login and a 10-digit username for farmer login.</div>
+    </div>
+
+
+    <script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings =
+            {"appId":"197b2db89cbfc944e0b8929e7a92e5d46","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+    {% endblock %}
+</body>
+</html>

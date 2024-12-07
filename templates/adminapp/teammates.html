@@ -1,0 +1,128 @@
+{% load static %}
+<html lang="en">
+  <head>
+    <title>Our Team</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 2rem;
+        color: #333;
+      }
+
+      .team-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 2rem;
+      }
+
+      .team-member {
+        background-color: white;
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 300px;
+      }
+
+      .team-member img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+      }
+
+      .team-member h3 {
+        color: #333;
+        margin-bottom: 0.5rem;
+      }
+
+      .team-member p {
+        color: #555;
+        font-size: 0.9rem;
+      }
+
+      .team-member a {
+        display: inline-block;
+        padding: 10px 15px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        margin-top: 10px;
+        font-size: 0.9rem;
+      }
+
+      .team-member a:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+
+  <body>
+  {% block body %}
+    <h1>Meet Our Team</h1>
+    <form action="{% url 'teammatespagelogic' %}" method="post" style="width: 100%;">
+      {% csrf_token %}
+      <div class="team-container">
+        <div class="team-member">
+          <img src="{% static 'images/my profile photo.jpg' %}" alt="Team Leader" />
+          <h3>Achanta Bhanu Vamsi</h3>
+          <p>Team Leader</p>
+          <p>
+            ID: 2300030009 <br>
+            Branch: CSE <br>
+            CGPA: 9.5
+          </p>
+          <a href="https://www.linkedin.com/pulse/ecommerce-platform-agriculture-empower-farmers-achanta-bhanu-vamsi-kweac" target="_blank">
+           View Profile
+          </a>
+        </div>
+
+        <div class="team-member">
+          <img src="{% static 'images/WhatsApp Image 2024-10-01 at 11.38.05_5cacdfe9.jpg' %}" alt="Team Member 3" />
+          <h3>Syed Mastan Vali</h3>
+          <p>HTML</p>
+          <p>
+            ID : 2300030659 <br>
+            Branch : CSE <br>
+            CGPA : 9.0
+          </p>
+        </div>
+        <div class="team-member">
+          <img src="{% static 'images/WhatsApp Image 2024-10-01 at 09.39.19_282bb916.jpg' %}" alt="Team Member 2" />
+          <h3>Alluri Nihit Varma</h3>
+          <p>CSS</p>
+          <p>
+            ID : 2300031197 <br>
+            Branch : CSE <br>
+            CGPA : 8.6
+          </p>
+        </div>
+
+      </div>
+    </form>
+  <script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings =
+            {"appId":"197b2db89cbfc944e0b8929e7a92e5d46","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+  {% endblock %}
+  </body>
+</html>

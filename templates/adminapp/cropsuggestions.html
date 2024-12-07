@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indian States and Crops</title>
+    <style>
+        /* Reset some basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 15px 0 10px;
+        }
+
+        select, p, button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 8px;
+        }
+
+        select {
+            background: rgba(255, 255, 255, 0.8);
+            color: #333;
+        }
+
+        p {
+            background: rgba(255, 255, 255, 0.9);
+            color: #555;
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        button {
+            background: #ff7c7c;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #ff5757;
+            transform: translateY(-3px);
+        }
+
+        button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <h2>Crops and Fertilizers Suggestions</h2>
+        <label for="state">Select a State:</label>
+        <select id="state" onchange="updateCrops()">
+            <option value="">-- Select State --</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+            <option value="Assam">Assam</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Chhattisgarh">Chhattisgarh</option>
+            <option value="Goa">Goa</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Haryana">Haryana</option>
+            <option value="Himachal Pradesh">Himachal Pradesh</option>
+            <option value="Jharkhand">Jharkhand</option>
+        </select>
+
+        <label for="crops">Suitable Crops:</label>
+        <select id="crops" onchange="updateFertilizers()">
+            <option value="">-- Select Crop --</option>
+        </select>
+
+        <p id="fertilizers">Fertilizers required will be displayed here.</p>
+
+        <button onclick="redirectToFertilizerPage()">Proceed to Fertilizer Details</button>
+    </div>
+
+    <script>
+        const data = {
+            "Andhra Pradesh": { crops: { "Rice": "Urea, Zinc Sulfate, Potash", "Maize": "DAP, Potash, Boron" } },
+            "Arunachal Pradesh": { crops: { "Millet": "Nitrogen, Phosphorus, Potash", "Ginger": "Organic Manure, Potash" } },
+            "Assam": { crops: { "Tea": "Nitrogen, Phosphorus, Potassium", "Jute": "Urea, DAP, Potash" } },
+            "Bihar": { crops: { "Wheat": "Urea, Potash, DAP", "Sugarcane": "Nitrogen, Phosphorus, Potash" } },
+            "Chhattisgarh": { crops: { "Paddy": "Urea, Zinc Sulfate, Potash", "Lentils": "DAP, Potash, Boron" } },
+            "Goa": { crops: { "Cashew": "Organic Manure, Potash, Boron", "Coconut": "Urea, DAP, Potash" } },
+            "Gujarat": { crops: { "Groundnut": "Gypsum, DAP, Potash", "Cotton": "NPK, Magnesium Sulfate" } },
+            "Haryana": { crops: { "Rice": "Urea, Zinc Sulfate, Potassium Nitrate", "Mustard": "Sulfur, Potash, DAP" } },
+            "Himachal Pradesh": { crops: { "Apple": "Potash, Phosphorus, Organic Manure", "Barley": "Urea, DAP, Potash" } },
+            "Jharkhand": { crops: { "Rice": "Urea, Zinc Sulfate, Potash", "Maize": "DAP, Potash, Boron" } }
+        };
+
+        function updateCrops() {
+            const stateSelect = document.getElementById("state");
+            const cropsSelect = document.getElementById("crops");
+            const fertilizersOutput = document.getElementById("fertilizers");
+
+            cropsSelect.innerHTML = '<option value="">-- Select Crop --</option>';
+            fertilizersOutput.textContent = "Fertilizers required will be displayed here.";
+
+            const selectedState = stateSelect.value;
+            if (selectedState && data[selectedState]) {
+                const crops = Object.keys(data[selectedState].crops);
+                crops.forEach(crop => {
+                    const option = document.createElement("option");
+                    option.value = crop;
+                    option.textContent = crop;
+                    cropsSelect.appendChild(option);
+                });
+            }
+        }
+
+        function updateFertilizers() {
+            const stateSelect = document.getElementById("state");
+            const cropsSelect = document.getElementById("crops");
+            const fertilizersOutput = document.getElementById("fertilizers");
+
+            const selectedState = stateSelect.value;
+            const selectedCrop = cropsSelect.value;
+
+            if (selectedState && selectedCrop && data[selectedState]) {
+                const fertilizers = data[selectedState].crops[selectedCrop];
+                fertilizersOutput.textContent = fertilizers || "No data available for this crop.";
+            }
+        }
+
+        function redirectToFertilizerPage() {
+            window.location.href = "{% url 'studentapp:fertilizerpagecall' %}";
+        }
+    </script>
+</body>
+</html>

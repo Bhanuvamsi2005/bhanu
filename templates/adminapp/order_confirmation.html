@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            padding: 2em;
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 0.5em 0 0.2em;
+        }
+        select, input, textarea, button {
+            width: 100%;
+            padding: 0.7em;
+            margin-bottom: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #218838;
+        }
+        #total-cost {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Order Confirmation</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label for="product">Select Product:</label>
+    <select id="product" name="product" required>
+        <option value="" data-price="0">-- Select Product --</option>
+        <option value="Phosphorus Fertilizer" data-price="200">Phosphorus Fertilizer - 200/-</option>
+        <option value="Nitrogen Fertilizer" data-price="180">Nitrogen Fertilizer - 180/-</option>
+        <option value="Potassium Fertilizer" data-price="250">Potassium Fertilizer - 250/-</option>
+        <option value="Urea Fertilizer" data-price="230">Urea Fertilizer - 230/-</option>
+        <option value="Ammonia Fertilizer" data-price="150">Ammonia Fertilizer - 150/-</option>
+        <option value="Organic Soil" data-price="300">Organic Soil - 300/-</option>
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" min="1" required>
+
+    <label for="phone">Phone Number:</label>
+    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="10-Digit number" required>
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="4" required></textarea>
+
+    <p id="total-cost">Total Cost: 0/-</p>
+    <button type="submit">Confirm Order</button>
+</form>
+
+<script>
+    const productSelect = document.getElementById('product');
+    const quantityInput = document.getElementById('quantity');
+    const totalCostElement = document.getElementById('total-cost');
+
+    function calculateTotalCost() {
+        const selectedOption = productSelect.options[productSelect.selectedIndex];
+        const price = parseFloat(selectedOption.getAttribute('data-price')) || 0;
+        const quantity = parseInt(quantityInput.value) || 0;
+        const totalCost = price * quantity;
+        totalCostElement.textContent = `Total Cost: ${totalCost}/-`;
+    }
+
+    productSelect.addEventListener('change', calculateTotalCost);
+    quantityInput.addEventListener('input', calculateTotalCost);
+</script>
+
+</body>
+</html>

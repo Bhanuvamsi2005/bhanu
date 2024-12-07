@@ -1,0 +1,31 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <link rel="stylesheet" href="{% static 'css/chatbotstyle.css' %}">
+    <title>Ui trail</title>
+</head>
+<body bgcolor="grey">
+{% block body %}
+<div align="center">
+
+<button class="button" data-text="Awesome">
+    <span class="actual-text">ChatBot</span>
+    <span aria-hidden="true" class="hover-text">ChatBot</span>
+</button>
+</div>
+<div align="center">
+ <div class="card">
+    <div class="chat-header">Chat</div>
+      <div class="chat-window">
+        <ul class="message-list"></ul>
+      </div>
+      <div class="chat-input">
+          <input type="text" class="message-input" placeholder="Type your message here">
+          <button class="send-button">Send</button>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% extends 'navbar/projectnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            padding: 50px;
+        }
+        .weather-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        .weather-box img {
+            width: 50px;
+        }
+        .weather-box .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Check the Weather</h1>
+
+<!-- Form with action attribute pointing to the 'get_weather' view -->
+<form method="POST" action="{% url 'get_weather' %}">
+    {% csrf_token %}
+    <input type="text" name="city" placeholder="Enter city" required>
+    <button type="submit">Check Weather</button>
+</form>
+
+{% if weather_data %}
+    <div class="weather-box">
+        {% if weather_data.error %}
+            <p class="error">{{ weather_data.error }}</p>
+        {% else %}
+            <h2>{{ weather_data.city }}</h2>
+            <img src="http://openweathermap.org/img/wn/{{ weather_data.icon }}@2x.png" alt="Weather icon">
+            <p>Temperature: {{ weather_data.temperature }} °C</p>
+            <p>Description: {{ weather_data.description }}</p>
+            <p>Humidity: {{ weather_data.humidity }}%</p>
+            <p>Pressure: {{ weather_data.pressure }} hPa</p>
+            <p>Wind Speed: {{ weather_data.wind_speed }} m/s</p>
+        {% endif %}
+    </div>
+{% endif %}
+
+</body>
+</html>

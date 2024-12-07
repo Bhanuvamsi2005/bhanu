@@ -1,0 +1,74 @@
+{% extends 'adminapp/loginpage.html' %}
+
+{% block content %}
+<div class="hostel-selector">
+    <form id="hostel-form" method="POST" action="{% url 'menu' %}">
+        {% csrf_token %}
+        <div class="dropdown-button">
+            <span id="selected-hostel">{% if selected_hostel %}{{ selected_hostel }}{% else %}Select Your Hostel{% endif %}</span>
+            <span>▼</span>
+        </div>
+        <div class="dropdown-content">
+            <div class="dropdown-item" data-hostel="A Block">A Block</div>
+            <div class="dropdown-item" data-hostel="B Block">B Block</div>
+            <div class="dropdown-item" data-hostel="C Block">C Block</div>
+            <div class="dropdown-item" data-hostel="D Block">D Block</div>
+        </div>
+        <input type="hidden" name="hostel" id="hostel-input">
+    </form>
+</div>
+
+{% if selected_hostel %}
+<div class="menu-container">
+    <h2 class="menu-title">{{ selected_hostel }} - Today's Menu</h2>
+    
+    <div class="meal-card">
+        <h3 class="meal-title">
+            <span class="meal-icon">🌅</span>
+            Breakfast
+        </h3>
+        <ul class="menu-items">
+            {% for item in breakfast_menu %}
+                <li class="menu-item">{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="meal-card">
+        <h3 class="meal-title">
+            <span class="meal-icon">☀️</span>
+            Lunch
+        </h3>
+        <ul class="menu-items">
+            {% for item in lunch_menu %}
+                <li class="menu-item">{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="meal-card">
+        <h3 class="meal-title">
+            <span class="meal-icon">🫖</span>
+            Snacks
+        </h3>
+        <ul class="menu-items">
+            {% for item in snacks_menu %}
+                <li class="menu-item">{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="meal-card">
+        <h3 class="meal-title">
+            <span class="meal-icon">🌙</span>
+            Dinner
+        </h3>
+        <ul class="menu-items">
+            {% for item in dinner_menu %}
+                <li class="menu-item">{{ item }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

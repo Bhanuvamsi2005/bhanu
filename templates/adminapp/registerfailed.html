@@ -1,0 +1,79 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Failed</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff4d4d, #ff9999);
+            color: #ffffff;
+        }
+
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 50px 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            color: #ff4d4d;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        a {
+            display: inline-block;
+            text-decoration: none;
+            background: #ff4d4d;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background 0.3s ease;
+        }
+
+        a:hover {
+            background: #e60000;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Registration Failed</h1>
+    <p>Something went wrong. Please try again or contact support if the issue persists.</p>
+    <a href="{% url 'registerpagelogic' %}">Back to Registration</a>
+</div>
+</body>
+</html>

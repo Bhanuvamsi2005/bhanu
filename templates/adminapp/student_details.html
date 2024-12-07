@@ -1,0 +1,59 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Details List</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+{% block body %}
+    <div class="container">
+        <h1>Farmer Details</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Course</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>John Doe</td>
+                    <td>20</td>
+                    <td>Computer Science</td>
+                    <td>john@example.com</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Jane Smith</td>
+                    <td>22</td>
+                    <td>Mathematics</td>
+                    <td>jane@example.com</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Emily Johnson</td>
+                    <td>21</td>
+                    <td>Biology</td>
+                    <td>emily@example.com</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Bhanu vamsi</td>
+                    <td>31</td>
+                    <td>CSE</td>
+                    <td>bhanuvamsi@gmail.com</td>
+                </tr>
+                <!-- Add more student rows as needed -->
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+</body>
+</html>

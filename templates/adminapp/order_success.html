@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('https://media.istockphoto.com/id/1415075096/photo/3d-cardboard-box-and-clipboard-with-tick-confirmed-order-delivery-concept-return-parcel-to.jpg?s=612x612&w=0&k=20&c=b9pIoDWcVWdCcbOeb54eMjdWpyn991belezJz66pPfw=');
+            background-size: cover;
+            color: rgb(102, 18, 237);
+            text-align: center;
+        }
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5em;
+            animation: fadeIn 1s ease-in-out;
+        }
+        p {
+            font-size: 1.2rem;
+            margin-top: 0;
+            animation: slideIn 1.2s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes slideIn {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        button {
+            margin-top: 1.5em;
+            padding: 0.8em 1.5em;
+            background: #fff;
+            color: #28a745;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease-in-out;
+        }
+        button:hover {
+            background: #28a745;
+            color: rgb(76, 17, 224);
+            transform: scale(1.05);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>Order Successful!</h2>
+        <p>Your order has been confirmed.</p>
+        <button onclick="window.location.href='/'">Go to Homepage</button>
+    </div>
+</body>
+</html>

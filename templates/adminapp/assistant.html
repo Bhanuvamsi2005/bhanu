@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Assistant</title>
+    <script>
+        let recognition;
+        function startListening() {
+            if (!('webkitSpeechRecognition' in window)) {
+                alert('Your browser does not support speech recognition.');
+                return;
+            }
+            recognition = new webkitSpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const userSpeech = event.results[0][0].transcript;
+                document.getElementById('user-input').value = userSpeech;
+                sendCommand(userSpeech);
+            };
+
+            recognition.onerror = function(event) {
+                console.error('Speech recognition error:', event);
+            };
+        }
+
+        function sendCommand(command) {
+            fetch('/assistant/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCSRFToken(),
+                },
+                body: JSON.stringify({ command: command }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('response').innerText = data.response;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function getCSRFToken() {
+            const cookies = document.cookie.split('; ');
+            for (let cookie of cookies) {
+                if (cookie.startsWith('csrftoken=')) {
+                    return cookie.split('=')[1];
+                }
+            }
+            return '';
+        }
+    </script>
+</head>
+<body>
+    <h1>Virtual Assistant</h1>
+    <button onclick="startListening()">Start Listening</button>
+    <input type="text" id="user-input" readonly>
+    <p id="response">Waiting for a response...</p>
+</body>
+</html>

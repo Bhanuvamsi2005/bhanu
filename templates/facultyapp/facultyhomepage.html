@@ -1,0 +1,37 @@
+{% extends 'navbar/facultynavbar.html' %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vendor</title>
+</head>
+<body>
+{% block body %}
+<h1 align="center">Welcome to Vendor App</h1>
+
+<div class="row g-0 bg-body-secondary position-relative">
+  <div class="col-md-6 mb-md-0 p-md-4">
+    <img src="{% static 'images/christian-lendl-VcgbNcbEY3s-unsplash.jpg' %}" class="w-100" alt="...">
+  </div>
+  <div class="col-md-6 p-4 ps-md-0">
+    <h5 class="mt-0">Agriculture Websites</h5>
+    <p>For detailed information on agriculture in India, you can visit the official website of the Department of Agriculture & Farmers Welfare, part of the Ministry of Agriculture and Farmers Welfare (MoA & FW) under the Government of India. This site offers a comprehensive look at various initiatives, schemes, and data related to agriculture in the country, such as crop forecasts, the Minimum Support Price (MSP) system, and area production estimates. You can also find resources on programs like Pradhan Mantri Fasal Bima Yojana, Rashtriya Krishi Vikas Yojana, and the National Agriculture Market (e-NAM).</p>
+    <a href="https://agriwelfare.gov.in/" class="stretched-link">Visit Website</a>
+  </div>
+</div>
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings =
+            {"appId":"197b2db89cbfc944e0b8929e7a92e5d46","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+{% endblock %}
+</body>
+
+</html>

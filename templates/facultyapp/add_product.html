@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Product</title>
+</head>
+<body style="font-family: Arial, sans-serif; background: #f4f4f4;">
+    <header style="background: #007bff; color: white; padding: 20px; text-align: center;">
+        <h1>Add New Product</h1>
+    </header>
+
+    <!-- Product Form -->
+    <div style="padding: 30px; max-width: 600px; margin: auto; background: white; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="id_name" style="display: block; margin-bottom: 8px;">Product Name:</label>
+            <input type="text" id="id_name" name="name" required
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
+
+            <label for="id_description" style="display: block; margin-bottom: 8px;">Product Description:</label>
+            <textarea id="id_description" name="description" required rows="4"
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+
+            <label for="id_price" style="display: block; margin-bottom: 8px;">Product Price:</label>
+            <input type="number" id="id_price" name="price" step="0.01" required
+                style="width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px;">
+
+            <button type="submit" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                Save Product
+            </button>
+        </form>
+    </div>
+
+    <!-- Product Listing Table -->
+    <div style="padding: 30px; max-width: 800px; margin: auto;">
+        <h2 style="color: #007bff;">Product List</h2>
+        <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+                <tr style="background: #007bff; color: white;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Product Name</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Description</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ product.name }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">{{ product.description }}</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">${{ product.price }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" style="padding: 10px; text-align: center;">No products added yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
